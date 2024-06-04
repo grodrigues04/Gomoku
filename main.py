@@ -17,13 +17,14 @@ class Board():
         return mainBoard
     def showBoard(self,mainBoard):
         number = 1
-        print('',number,end ="")
+        print('',f'\033[31m{number}\033[0m',end ="")
         number+=1
         while number <= self.line:
+            numberPrint = f'\033[31m{number}\033[0m'
             if number <= 9:
-                print('  ',number,end ="")
+                print('  ',numberPrint,end ="")
             else:
-                print(' ',number,end ="")
+                print(' ',numberPrint,end ="")
             number+=1
         print()
         for linha in mainBoard:
