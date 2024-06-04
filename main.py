@@ -16,9 +16,11 @@ class Board():
             lineControl+=1
         return mainBoard
     def showBoard(self,mainBoard):
-        number = 1
+        number = 1  
+        print('coluna: ',end='')
         print('',f'\033[31m{number}\033[0m',end ="")
         number+=1
+        #mostrando as colunas com numeros
         while number <= self.line:
             numberPrint = f'\033[31m{number}\033[0m'
             if number <= 9:
@@ -27,9 +29,18 @@ class Board():
                 print(' ',numberPrint,end ="")
             number+=1
         print()
+        linhaValor = 1
+        #mostrando as linhas da matriz
         for linha in mainBoard:
+            valorPrint = f'\033[31m{linhaValor}\033[0m'
+            if linhaValor <10:
+                print(f'Linha:{valorPrint} ',end='')
+            else:
+                print(f'Linha:{valorPrint}',end='')
+            linhaValor+=1
             for item in linha:
-                print(f' {item} |',end='') 
+                valores = f'\033[35m{item}\033[0m'
+                print(f' {valores} |',end='') 
             print()
 print()
 teste = Board()
