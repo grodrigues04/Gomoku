@@ -43,6 +43,13 @@ class Board():
                 valores = f'\033[35m{item}\033[0m'
                 print(f' {valores} |',end='') 
             print()
+            print('         ',end='')
+            print('--|',end='')
+            quadrado = 1
+            while quadrado < self.line:
+                print('---|',end='')
+                quadrado+=1
+            print()
 print()
 teste = Board()
 tabuleiro = teste.CreateBoard()
@@ -53,15 +60,19 @@ class GameRules():
         self.playertwo = playertwo
         
     def playturn(self,playeroneField,playertwoField,turn):
+        #TO-DO: cores individuais para cada jogador 
         if turn:
             playeroneFieldLine = playeroneField[0]
             playeroneFieldColum = playeroneField[1]
             tabuleiro = tabuleiro[playeroneFieldLine][playeroneFieldColum]
         else:
-            playertwoFieldLine = playertwoField[0]
+            playertwoFieldLine =  playertwoField[0]
             playertwoFieldColum = playertwoField[1]
             tabuleiro = tabuleiro[playertwoFieldLine][playertwoFieldColum]
 teste.showBoard(tabuleiro)
+
+
+
 
 '''
  1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19
