@@ -15,6 +15,7 @@ class Board():
             mainBoard.append(row)
             lineControl+=1
         return mainBoard
+    
     def showBoard(self,mainBoard):
         number = 1  
         print('coluna: ',end='')
@@ -45,6 +46,21 @@ class Board():
 print()
 teste = Board()
 tabuleiro = teste.CreateBoard()
+
+class GameRules():
+    def __init__(self,playerone, playertwo):
+        self.playerone = playerone
+        self.playertwo = playertwo
+        
+    def playturn(self,playeroneField,playertwoField,turn):
+        if turn:
+            playeroneFieldLine = playeroneField[0]
+            playeroneFieldColum = playeroneField[1]
+            tabuleiro = tabuleiro[playeroneFieldLine][playeroneFieldColum]
+        else:
+            playertwoFieldLine = playertwoField[0]
+            playertwoFieldColum = playertwoField[1]
+            tabuleiro = tabuleiro[playertwoFieldLine][playertwoFieldColum]
 teste.showBoard(tabuleiro)
 
 '''
