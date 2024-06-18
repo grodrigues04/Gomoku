@@ -16,7 +16,8 @@ class Board():
             lineControl+=1
         return mainBoard
     
-    def showBoard(self,mainBoard):
+    def showBoard(self, mainBoard):
+        print('mainBoard do Bard:\n',mainBoard)
         number = 1  
         print('coluna: ',end='')
         print('',f'\033[31m{number}\033[0m',end ="")
@@ -50,4 +51,5 @@ class Board():
                 print('---|',end='')
                 quadrado+=1
             print()
+            
             
