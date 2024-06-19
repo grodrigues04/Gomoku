@@ -13,3 +13,46 @@ class GameRules():
         else:
             self.tabuleiro[playerline][playercolum] = '\033[34m2\033[0m'
     
+    def detectVictory(self, jogadaLinha, jogadaColuna, turn):
+        #Verificando as diagonais 
+        scoreUpperDigRT = 1
+        scoreUpperDiaLR = 1
+        scoreLowDiaLR = 1
+        scoreLowDiaRL = 1
+        ScoreLineLR = 1
+        ScoreLineRL =1
+        ScoreColumDown = 1
+        ScoreColumUp = 1
+        diagonal = 1
+        while diagonal < 4:
+            #Diagonal de baixo esquerda para direita
+            if self.tabuleiro[jogadaLinha+diagonal][jogadaColuna+diagonal] == turn: 
+                 scoreLowDiaLR+=1
+            #Diagonal de cima direita para esquerda
+            if self.tabuleiro[jogadaLinha-diagonal][jogadaColuna-diagonal] == turn: 
+                scoreUpperDigRT+=1
+            #Diagonal de cima esquerda para a direita
+            if self.tabuleiro[jogadaLinha-diagonal][jogadaColuna+diagonal] == turn:
+                scoreUpperDiaLR+=1
+            #Diagonal de baixo direita para esquerda
+            if self.tabuleiro[jogadaLinha+diagonal][jogadaColuna-diagonal] == turn:
+                scoreLowDiaRL+=1
+            #Verificando a apenas a linha direita para esquerda
+            if self.tabuleiro[jogadaLinha][jogadaColuna+diagonal] == turn:    
+                ScoreLineLR+=1
+            #Verificando a apenas a linha esquerda para direta
+            if self.tabuleiro[jogadaLinha][jogadaColuna-diagonal] == turn:
+                ScoreLineRL+=1
+            #Verificando a apenas a coluna pra baixo
+            if self.tabuleiro[jogadaLinha+1][jogadaColuna] == turn:
+                ScoreColumDown +=1
+            #Verificando a apenas a coluna pra cima
+            if self.tabuleiro[jogadaLinha-1][jogadaColuna] == turn:
+                ScoreColumUp +=1
+            diagonal+=1
+        scoreList = [scoreUpperDigRT, scoreUpperDiaLR, scoreLowDiaLR, scoreLowDiaRL, ScoreLineLR, ScoreLineRL,ScoreColumDown,ScoreColumUp]
+        if 5 in scoreList: #Então, algumas das pontuções foi 5
+            return True
+        else:
+            return False
+        
