@@ -1,3 +1,7 @@
+turnColor = {
+    0:'\033[34m0\033[0m',
+    1:'\033[32m1\033[0m'
+}
 class GameRules():
     def __init__(self, tabuleiro):
         self.tabuleiro = tabuleiro
@@ -11,9 +15,10 @@ class GameRules():
         if turn:
             self.tabuleiro[playerline][playercolum] = '\033[32m1\033[0m'
         else:
-            self.tabuleiro[playerline][playercolum] = '\033[34m2\033[0m'
+            self.tabuleiro[playerline][playercolum] = '\033[34m0\033[0m'
     
     def detectVictory(self, jogadaLinha, jogadaColuna, turn):
+        turn = turnColor[turn]
         #Verificando as diagonais 
         scoreUpperDigRT = 1
         scoreUpperDiaLR = 1
@@ -24,7 +29,7 @@ class GameRules():
         ScoreColumDown = 1
         ScoreColumUp = 1
         diagonal = 1
-        while diagonal < 4:
+        while diagonal <= 5:
             #Diagonal de baixo esquerda para direita
             if self.tabuleiro[jogadaLinha+diagonal][jogadaColuna+diagonal] == turn: 
                  scoreLowDiaLR+=1
@@ -51,6 +56,7 @@ class GameRules():
                 ScoreColumUp +=1
             diagonal+=1
         scoreList = [scoreUpperDigRT, scoreUpperDiaLR, scoreLowDiaLR, scoreLowDiaRL, ScoreLineLR, ScoreLineRL,ScoreColumDown,ScoreColumUp]
+        #print(scoreList)
         if 5 in scoreList: #Então, algumas das pontuções foi 5
             return True
         else:
