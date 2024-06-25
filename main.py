@@ -24,26 +24,5 @@ def start():
     return playerOne, playerTwo, turn, turnInvert
 
 p1, p2, turn, turnInvert = start()
-
-
-
-    
 jogoPrincipal = GameGUI.GameGUI(p1 ,p2, turn, turnInvert)
 jogoPrincipal.play(1) #Jogador 1 comeca
-
-
-"""
-    turn = {
-        1: playerone,
-        2:playerTwo 
-    }
-    ou 
-    turn = {
-        1: playerone,
-        3:bot 
-    }
------------------------------
-    turnInverter = {
-        
-    }
-"""
