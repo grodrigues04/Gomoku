@@ -1,6 +1,7 @@
 #Iniciando o jogo
 import GameGUI
 from machine import Bot
+from Board import Board
 def start():
     turn = {}
     turnInvert = {}
@@ -20,7 +21,6 @@ def start():
         turnInvert[2] = 1 
         turnInvert[1] = 2
 
-        
     return playerOne, playerTwo, turn, turnInvert
 
 p1, p2, turn, turnInvert = start()
