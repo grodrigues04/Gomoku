@@ -2,18 +2,18 @@ from Board import Board
 from gameRules import GameRules
 from Player import Player
 
-class GameGUI(): #todo jogo tem regras
+class GameGUI(): 
     def __init__(self,player1,player2,turn, turnInverter):
         self.turn = turn
         self.turnInverter = turnInverter
         self.rules = GameRules()
         self.board = Board()
-        self.boardToPlay = self.board.CreateBoard() #passando o tabuleiro para o construtor de gameRules
-        self.player = Player(player1,player2) #o jogo TEM jogadores.
+        self.boardToPlay = self.board.CreateBoard() 
+        self.player = Player(player1,player2) 
         self.TurnTime = 1
     
-    def victory(self,player,pos):
-        print(f'PARABENS, VITÓRIA DO {self.turn[self.TurnTime]}')
+    def victory(self, player, pos):
+        print(f'PARABENS, VITÓRIA DO {player}')
         print(f"Vitoria com a jogada na posicao: {pos}")
         return True
         
@@ -31,13 +31,11 @@ class GameGUI(): #todo jogo tem regras
         if playValidate and self.rules.validRange(jogadaLinha,jogadaColuna, self.boardToPlay):
             self.rules.playturn(jogadaLinha, jogadaColuna, self.TurnTime, self.boardToPlay)
             winCondition = self.rules.detectVictory(jogadaLinha, jogadaColuna, self.TurnTime, self.boardToPlay)
-            print("Condicao de vitoria:",winCondition)
             if winCondition:
                 self.board.showBoard(self.boardToPlay)
                 value = self.victory(self.turn[self.TurnTime],[jogadaLinha+1, jogadaColuna+1])
                 if value:
-                    return
-                print("turno:", self.turnInverter)
+                    return #para o codigo
             self.board.showBoard(self.boardToPlay)
             self.TurnTime = self.turnInverter[self.TurnTime] #Se a jogada for valida, troca o turno
         else:

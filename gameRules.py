@@ -1,6 +1,6 @@
 turnColor = {
     1: '\033[32m1\033[0m',
-    2: '\033[34m0\033[0m',
+    2: '\033[34m2\033[0m',
     3: '\033[33m3\033[0m'
 }
 
@@ -28,118 +28,29 @@ class GameRules():
     
     def detectVictory(self, jogadaLinha, jogadaColuna, turnTime, tabuleiro):
         turn = turnColor[turnTime]
-        print(turn)
-        #variáveis de pontuação para cada direcao.
-        scoreUpperDiaRL = 1
-        scoreUpperDiaLR = 1
-        scoreLowDiaLR = 1
-        scoreLowDiaRL = 1
-        ScoreLineLR = 1
-        ScoreLineRL = 1
-        ScoreColumDown = 1
-        ScoreColumUp = 1
-        # Diagonal de baixo esquerda para direita
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha + diagonalA, jogadaColuna + diagonalA,tabuleiro):
-                if tabuleiro[jogadaLinha + diagonalA][jogadaColuna + diagonalA] == turn:
-                    scoreLowDiaLR += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
+        def countDirection(deltaLinha, deltaColuna):
+            count = 0
+            linha, coluna = jogadaLinha, jogadaColuna
+            while self.validRange(linha, coluna, tabuleiro) and tabuleiro[linha][coluna] == turn:
+                count += 1
+                linha += deltaLinha
+                coluna += deltaColuna
+            return count
 
-        # Diagonal de cima direita para esquerda
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha - diagonalA, jogadaColuna - diagonalA, tabuleiro):
-                if tabuleiro[jogadaLinha - diagonalA][jogadaColuna - diagonalA] == turn:
-                    scoreUpperDiaRL += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Diagonal de cima esquerda para direita
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha - diagonalA, jogadaColuna + diagonalA, tabuleiro):
-                if tabuleiro[jogadaLinha - diagonalA][jogadaColuna + diagonalA] == turn:
-                    scoreUpperDiaLR += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Diagonal de baixo direita para esquerda
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha + diagonalA, jogadaColuna - diagonalA, tabuleiro):
-                if tabuleiro[jogadaLinha + diagonalA][jogadaColuna - diagonalA] == turn:
-                    scoreLowDiaRL += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Verificando a linha para a direita
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha, jogadaColuna + diagonalA, tabuleiro):
-                if tabuleiro[jogadaLinha][jogadaColuna + diagonalA] == turn:
-                    ScoreLineLR += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Verificando a linha para a esquerda
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha, jogadaColuna - diagonalA, tabuleiro):
-                if tabuleiro[jogadaLinha][jogadaColuna - diagonalA] == turn:
-                    ScoreLineRL += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Verificando a coluna para baixo
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha + diagonalA, jogadaColuna, tabuleiro):
-                if tabuleiro[jogadaLinha + diagonalA][jogadaColuna] == turn:
-                    ScoreColumDown += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Verificando a coluna para cima
-        diagonalA = 1
-        while diagonalA < 5:
-            if self.validRange(jogadaLinha - diagonalA, jogadaColuna, tabuleiro):
-                if tabuleiro[jogadaLinha - diagonalA][jogadaColuna] == turn:
-                    ScoreColumUp += 1
-                    diagonalA += 1
-                else:
-                    break
-            else:
-                break
-
-        # Verificando se alguma das pontuações atingiu 5
-        scoreList = [scoreUpperDiaRL, scoreUpperDiaLR, scoreLowDiaLR, scoreLowDiaRL, ScoreLineLR, ScoreLineRL, ScoreColumDown, ScoreColumUp]
-        print(scoreList)
-        if 5 in scoreList:
-            return True
-        else:
-            return False
+        directions = [
+            (1, 0), (-1, 0), # vertical
+            (0, 1), (0, -1), # horizontal
+            (1, 1), (-1, -1), # diagonal \
+            (1, -1), (-1, 1) # diagonal /
+        ]
+        i = 0
+        while i < len(directions):
+            delta1 = directions[i] 
+            delta2 = directions[i + 1]
+            total_count = countDirection(*delta1) + countDirection(*delta2) - 1 # subtrai 1 porque a posição atual é contada duas vezes
+            if total_count >= 5:
+                return True
+            i+=2 #primeiro pegamos so os valor de vertical, depois so os valores de horizonal...
+        return False
 
         
