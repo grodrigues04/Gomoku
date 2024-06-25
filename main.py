@@ -1,7 +1,7 @@
 #Iniciando o jogo
 import GameGUI
 from machine import Bot
-from Board import Board
+
 def start():
     turn = {}
     turnInvert = {}
