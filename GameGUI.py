@@ -11,6 +11,8 @@ class GameGUI():
         self.boardToPlay = self.board.CreateBoard() 
         self.player = Player(player1,player2) 
         self.TurnTime = 1
+        
+        self.board.showBoard(self.boardToPlay)  #Mostrando o tabuleiro assim que o jogo inicar
     
     def victory(self, player, pos):
         print(f'PARABENS, VITÓRIA DO {player}')
