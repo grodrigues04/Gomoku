@@ -10,6 +10,6 @@ Para usar, apenas execute o arquivo main.py.
    * Coloque o terminal em tela cheia para uma melhor experiência
 
 
-## Authors
+## Autor
    * Gustavo | [Linkedin](https://www.linkedin.com/in/gustavorodriguesb04/)
 
